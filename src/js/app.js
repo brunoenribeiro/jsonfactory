@@ -1,8 +1,8 @@
 var app = new Vue({
     el: '#app',
     data: {
-        objProps: [{ key: 'id', type: 'guid'}],
-        amount: 1,
+        objProps: initObjPropsFromURL(window.location.href),
+        amount: 1
     },
     methods: {
         addProp() {
@@ -26,3 +26,14 @@ var app = new Vue({
         }
     }
 });
+
+function initObjPropsFromURL(href) {
+    if (!href.match(/\?(.*)/)) return [{ key: 'id', type: 'guid'}];
+    var queryParams = href.match(/\?(.*)/)[1];
+    return queryParams
+        .split('&')
+        .map(p => ({
+            key: p.match(/\=(.*)\,/)[1],
+            type: p.match(/\,(.*)/)[1]
+        }));
+}
