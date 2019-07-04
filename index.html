@@ -45,7 +45,13 @@
             <code class="small-container">{{ configURL }}</code>
         </div>
         
-        <code>{{ json }}</code>
+        <div class="box">
+            <button @click="copyToClipboard">Copy to clipboard</button>
+            <code>{{ json }}</code>
+            
+            <!-- Hidden input to let user copy code to clipboard -->
+            <input type="hidden" id="json" v-model="json">
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>

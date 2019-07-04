@@ -10,10 +10,23 @@ var app = new Vue({
         },
         removeProp(index) {
             this.objProps = this.objProps.filter((el, i) => i !== index);
+        },
+        copyToClipboard() {
+            let code = document.querySelector('#json');
+            code.setAttribute('type', 'text');
+            code.select();
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+            } catch (err) {}
+
+            /* unselect the range */
+            code.setAttribute('type', 'hidden')
+            window.getSelection().removeAllRanges()
         }
     },
     computed: {
-        json: function json() {
+        json() {
             var json = [];
             for (i = 0; i < this.amount; i++) {
                 var obj = {};
@@ -22,9 +35,9 @@ var app = new Vue({
                     .forEach(prop => obj[prop.key] = chance[prop.type]());
                 json.push(obj);
             }
-            return json;
+            return JSON.stringify(json);
         },
-        configURL: function configURL() {
+        configURL() {
             return window.location.href.replace(/(\?.*)/, '')
                 + '?'
                 + this.objProps
@@ -34,6 +47,7 @@ var app = new Vue({
     }
 });
 
+// Helper functions
 function initObjPropsFromURL(href) {
     if (!href.match(/\?(.*)/)) return [{ key: 'id', type: 'guid'}];
     var queryParams = href.match(/\?(.*)/)[1];
