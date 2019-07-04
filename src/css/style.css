@@ -1,3 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Raleway&display=swap');
+
+* {
+    margin: 0;
+}
+
+#app {
+    margin: 20px;
+}
+
+header {
+    box-sizing: border-box;
+    margin: 20px;
+    background-color: black;
+    padding: 20px;
+}
+
+header h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 64px;
+    color: white;
+    margin: 0;
+    margin-bottom: 16px;
+}
+
+header span {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 4px;
+}
+
+code {
+    padding: 1em 2em;
+}
+
 .app-container {
     display: flex;
 }
@@ -13,4 +49,12 @@
 
 .hidden {
     visibility: hidden;
+}
+
+.red {
+    color: red;
+}
+
+footer {
+    padding: 1em 2em;
 }

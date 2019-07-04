@@ -13,13 +13,16 @@
     </noscript>
     
     <header>
-        <h1>JSON Factory</h1>
+        <h1>JSON<span class="red">Factory</span></h1>
         <span>Create lots of objects easily</span>
     </header>
 
     <div id="app" class="app-container">
         <div class="box" id="object-props">
-            <span>Which properties your objects should have?</span>
+            How many objects?
+            <input name="amount" type="text" v-model="amount">
+            
+            Which properties?
             <div class="pair" v-for="(prop, index) in objProps" :key="index">
                 <input v-model="objProps[index].key" type="text" />
                 <select v-model="objProps[index].type">
@@ -39,22 +42,11 @@
             <button @click="addProp">Add Property</button>
 
             <span>Your configuration's URL</span>
-            <code>
-                {{ configURL }}
-            </code>
+            <code class="small-container">{{ configURL }}</code>
         </div>
-        <div class="box">
-            <label for="amount">How many objects?</label>
-            <input name="amount" type="text" v-model="amount">
-            <code>
-                {{ json }}
-            </code>
-        </div>
+        
+        <code>{{ json }}</code>
     </div>
-
-    <footer>
-        By Bruno
-    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chance/1.0.18/chance.min.js"></script>
