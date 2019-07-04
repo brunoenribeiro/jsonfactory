@@ -1,0 +1,16 @@
+.app-container {
+    display: flex;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
+
+.pair {
+    display: flex;
+}
+
+.hidden {
+    visibility: hidden;
+}
