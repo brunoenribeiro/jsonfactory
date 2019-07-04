@@ -23,6 +23,13 @@ var app = new Vue({
                 json.push(obj);
             }
             return json;
+        },
+        configURL: function configURL() {
+            return window.location.href.replace(/(\?.*)/, '')
+                + '?'
+                + this.objProps
+                    .map((prop, i) => `${i}=${prop.key},${prop.type}`)
+                    .join('&');
         }
     }
 });

@@ -37,6 +37,11 @@
                 <button :class="{ hidden: index === 0 }" @click="removeProp(index)">Remove</button>
             </div>
             <button @click="addProp">Add Property</button>
+
+            <span>Your configuration's URL</span>
+            <code>
+                {{ configURL }}
+            </code>
         </div>
         <div class="box">
             <label for="amount">How many objects?</label>
