@@ -1,4 +1,5 @@
-var createDataType = (name = '', label = '', opts = {}, chanceMethodName = '') => {
+/** Data Type Factory */
+function createDataType(name = '', label = '', opts = {}, chanceMethodName = '') {
     if (!chanceMethodName) chanceMethodName = name;
     return {
         name,
@@ -8,7 +9,10 @@ var createDataType = (name = '', label = '', opts = {}, chanceMethodName = '') =
     }
 };
 
+/** Data Types Constant */
 var DATA_TYPES = [
+    createDataType('guid', 'guid'),
+    createDataType('string', 'string', { length: 15 }),
     createDataType('name', 'full name'),
     createDataType('first', 'first name'),
     createDataType('last', 'last name'),
@@ -18,9 +22,13 @@ var DATA_TYPES = [
     createDataType('email', 'email'),
     createDataType('address', 'address'),
     createDataType('city', 'city'),
-    createDataType('guid', 'guid'),
-    createDataType('string', 'string', { length: 15 })
 ];
+
+/** Object Property Configuration Factory */
+function createObjPropConfig(key, type) {
+    if (!key || !type) return { key: 'id', type: DATA_TYPES[0] };
+    return { key, type };
+}
 
 var app = new Vue({
     el: '#app',
@@ -74,12 +82,14 @@ var app = new Vue({
 
 // Helper functions
 function initObjPropsFromURL(href) {
-    if (!href.match(/\?(.*)/)) return [{ key: 'id', type: 'guid'}];
+    if (!href.match(/\?(.*)/)) return [createObjPropConfig()];
     var queryParams = href.match(/\?(.*)/)[1];
     return queryParams
         .split('&')
-        .map(p => ({
-            key: p.match(/\=(.*)\,/)[1],
-            type: DATA_TYPES.find(type => type.name === p.match(/\,(.*)/)[1])
-        }));
+        .map(p => 
+            createObjPropConfig(
+                p.match(/\=(.*)\,/)[1],
+                DATA_TYPES.find(type => type.name === p.match(/\,(.*)/)[1])
+            )
+        );
 }
