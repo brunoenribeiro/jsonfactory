@@ -13,36 +13,50 @@
     </noscript>
     
     <header>
-        <h1>JSON<span class="red">Factory</span></h1>
+        <h1>JSON <span class="red">Factory</span></h1>
         <span>Create lots of objects easily</span>
     </header>
 
-    <div id="app" class="app-container">
-        <div class="box" id="object-props">
-            How many objects?
-            <input name="amount" type="text" v-model="amount">
-            
-            Which properties?
-            <div class="pair" v-for="(prop, index) in objKeys" :key="index">
-                <input v-model="objKeys[index].key" type="text" />
-                <select v-model="objKeys[index].type">
-                  <option v-for="type in DATA_TYPES" :value="type">{{ type.label }}</option>
-                </select>
-                <button :class="{ hidden: index === 0 }" @click="removeProp(index)">Remove</button>
-            </div>
-            <button @click="addProp">Add Property</button>
+    <div id="app">
+      <section>
+        <h2>Configurations</h2>
+        <div>
+          <label>
+            Amount
+            <input type="text" v-model="amount">
+          </label>
+        </div>
 
-            <span>Your configuration's URL</span>
-            <code class="small-container">{{ configURL }}</code>
+        <div>
+          Properties
+          <button @click="addProp">Add</button>
+          <div v-for="(prop, index) in objKeys" :key="index">
+              <input v-model="objKeys[index].key" type="text" />
+              <select v-model="objKeys[index].type">
+                <option v-for="type in DATA_TYPES" :value="type">{{ type.label }}</option>
+              </select>
+              <button :class="{ hidden: index === 0 }" @click="removeProp(index)">X</button>
+          </div>
         </div>
-        
-        <div class="box">
-            <button @click="copyToClipboard">Copy to clipboard</button>
-            <code>{{ json }}</code>
+      </section>
+
+      <section>
+        <h2>Load configurations later</h2>
+        <div>
+          <code>{{ configURL }}</code>
+        </div>
+      </section>
+
+      <section>
+        <h2>Your JSON array</h2>
+        <button @click="copyToClipboard">Copy to clipboard</button>
+        <div>
+          <code>{{ json }}</code>
+        </div>
             
-            <!-- Hidden input to let user copy code to clipboard -->
-            <input type="hidden" id="json" v-model="json">
-        </div>
+        <!-- Hidden input to let user copy code to clipboard -->
+        <input type="hidden" id="json" v-model="json">
+      </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
