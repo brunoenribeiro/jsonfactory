@@ -1,15 +1,40 @@
+var createDataType = (name = '', label = '', opts = {}, chanceMethodName = '') => {
+    if (!chanceMethodName) chanceMethodName = name;
+    return {
+        name,
+        label,
+        opts,
+        chanceMethodName
+    }
+};
+
+var DATA_TYPES = [
+    createDataType('name', 'full name'),
+    createDataType('first', 'first name'),
+    createDataType('last', 'last name'),
+    createDataType('age', 'age'),
+    createDataType('birthday', 'birthday'),
+    createDataType('cpf', 'cpf'),
+    createDataType('email', 'email'),
+    createDataType('address', 'address'),
+    createDataType('city', 'city'),
+    createDataType('guid', 'guid'),
+    createDataType('string', 'string', { length: 15 })
+];
+
 var app = new Vue({
     el: '#app',
     data: {
-        objProps: initObjPropsFromURL(window.location.href),
+        DATA_TYPES,
+        objKeys: initObjPropsFromURL(window.location.href),
         amount: 1
     },
     methods: {
         addProp() {
-            this.objProps.push({ key:'', type: '' });
+            this.objKeys.push({ key:'', type: createDataType() });
         },
         removeProp(index) {
-            this.objProps = this.objProps.filter((el, i) => i !== index);
+            this.objKeys = this.objKeys.filter((el, i) => i !== index);
         },
         copyToClipboard() {
             let code = document.querySelector('#json');
@@ -30,9 +55,9 @@ var app = new Vue({
             var json = [];
             for (i = 0; i < this.amount; i++) {
                 var obj = {};
-                this.objProps
-                    .filter(prop => prop.key && chance[prop.type])
-                    .forEach(prop => obj[prop.key] = chance[prop.type]());
+                this.objKeys
+                    .filter(prop => prop.key && chance[prop.type.chanceMethodName])
+                    .forEach(prop => obj[prop.key] = chance[prop.type.chanceMethodName](prop.type.opts));
                 json.push(obj);
             }
             return JSON.stringify(json);
@@ -40,8 +65,8 @@ var app = new Vue({
         configURL() {
             return window.location.href.replace(/(\?.*)/, '')
                 + '?'
-                + this.objProps
-                    .map((prop, i) => `${i}=${prop.key},${prop.type}`)
+                + this.objKeys
+                    .map((prop, i) => `${i}=${prop.key},${prop.type.name}`)
                     .join('&');
         }
     }
@@ -55,6 +80,6 @@ function initObjPropsFromURL(href) {
         .split('&')
         .map(p => ({
             key: p.match(/\=(.*)\,/)[1],
-            type: p.match(/\,(.*)/)[1]
+            type: DATA_TYPES.find(type => type.name === p.match(/\,(.*)/)[1])
         }));
 }
