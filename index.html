@@ -23,7 +23,7 @@
         <div>
           <label>
             Amount
-            <input type="text" v-model="amount">
+            <input type="number" min="1" v-model="amount">
           </label>
         </div>
 
@@ -41,7 +41,7 @@
       </section>
 
       <section>
-        <h2>Load configurations later</h2>
+        <h2>Load configurations</h2>
         <div>
           <code>{{ configURL }}</code>
         </div>
