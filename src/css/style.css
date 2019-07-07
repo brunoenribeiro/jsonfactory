@@ -2,6 +2,7 @@
 
 * {
     margin: 0;
+    font-family: monospace;
 }
 
 #app {
@@ -43,4 +44,17 @@ section {
 
 .red {
     color: red;
+}
+
+button {
+    background: none;
+    border: 1px solid;
+    padding: 0.25rem 1rem;
+    transition: all 0.25s;
+}
+
+button:hover {
+    background: black;
+    color: red;
+    border: 1px solid black;
 }

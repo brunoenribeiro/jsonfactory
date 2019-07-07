@@ -48,8 +48,11 @@
       </section>
 
       <section>
-        <h2>Your JSON array</h2>
-        <button @click="copyToClipboard">Copy to clipboard</button>
+        <h2>
+          Your JSON array
+          <button @click="copyToClipboard">Copy to clipboard</button>
+        </h2>
+        
         <div>
           <code>{{ json }}</code>
         </div>
