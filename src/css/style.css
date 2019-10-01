@@ -17,17 +17,20 @@ header {
 }
 
 header h1 {
-    font-family: 'Raleway', sans-serif;
     font-size: 64px;
     color: white;
     margin: 0;
     margin-bottom: 16px;
 }
 
-header span {
+header p {
     font-family: 'Montserrat', sans-serif;
     color: white;
     margin-bottom: 4px;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
 }
 
 section {
@@ -36,14 +39,6 @@ section {
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
     padding: 1rem;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.red {
-    color: red;
 }
 
 button {
@@ -57,4 +52,34 @@ button:hover {
     background: black;
     color: red;
     border: 1px solid black;
+}
+
+/*/////////////////////////////////
+
+    UTILS
+
+/////////////////////////////////*/
+
+.font-heading {
+    font-family: 'Raleway', sans-serif;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.red {
+    color: red;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
 }

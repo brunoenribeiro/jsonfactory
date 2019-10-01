@@ -13,14 +13,14 @@
     </noscript>
     
     <header>
-        <h1>JSON <span class="red">Factory</span></h1>
-        <span>Create lots of objects easily</span>
+        <h1 class="font-heading">JSON <span class="red font-heading">Factory</span></h1>
+        <p>Create lots of objects easily</p>
     </header>
 
     <div id="app">
       <section>
-        <h2>Configurations</h2>
-        <div>
+        <h2>Object configuration</h2>
+        <div class="mb-2">
           <label>
             Amount
             <input type="number" min="1" v-model="amount">
@@ -28,20 +28,25 @@
         </div>
 
         <div>
-          Properties
-          <button @click="addProp">Add</button>
-          <div v-for="(prop, index) in objKeys" :key="index">
+          <div class="mb-2">
+            Properties
+          </div>
+          <div
+            v-for="(prop, index) in objKeys"
+            :key="index"
+            class="mb-1">
               <input v-model="objKeys[index].key" type="text" />
               <select v-model="objKeys[index].type">
                 <option v-for="type in DATA_TYPES" :value="type">{{ type.label }}</option>
               </select>
               <button :class="{ hidden: index === 0 }" @click="removeProp(index)">X</button>
           </div>
+          <button @click="addProp">Add</button>
         </div>
       </section>
 
       <section>
-        <h2>Load configurations</h2>
+        <h2>Save for later</h2>
         <div>
           <code>{{ configURL }}</code>
         </div>
